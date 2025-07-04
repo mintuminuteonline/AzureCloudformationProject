@@ -17,7 +17,7 @@ variables:
 
 stages:
   - stage: CI_Validation
-    displayName: 'CI - validation template'
+    displayName: 'CI validate-template'
     jobs:
       - job: Validate template
         displayName: 'Validate cloudformation Template'
