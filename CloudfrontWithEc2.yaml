@@ -217,29 +217,43 @@ Outputs:
   CloudFrontDomainName:
     Description: Domain name of the CloudFront distribution
     Value: !GetAtt CloudFrontDistribution.DomainName
+
   EC2InstanceId:
     Description: ID of the first EC2 instance
     Value: !Ref MyEC2Instance
+
   EC2InstanceId2:
     Description: ID of the second EC2 instance
     Value: !Ref MyEC2Instance2
+
   EC2PublicIp:
     Description: Public IP of the first EC2 instance
     Value: !GetAtt MyEC2Instance.PublicIp
+
   EC2PublicIp2:
     Description: Public IP of the second EC2 instance
     Value: !GetAtt MyEC2Instance2.PublicIp
+
   VpcId:
     Description: ID of the created VPC
     Value: !Ref MyVPC
+
   SubnetId:
     Description: ID of the first public subnet
     Value: !Ref MyPublicSubnet
+
   SubnetId2:
     Description: ID of the second public subnet
     Value: !Ref MyPublicSubnet2
+
   SecurityGroupId:
     Description: ID of the EC2 security group
     Value: !Ref WebSecurityGroup
+
   ALBSecurityGroupId:
     Description: ID of the ALB security group
+    Value: !Ref ALBSecurityGroup
+
+  ALBDNSName:
+    Description: DNS name of the Application Load Balancer
+    Value: !GetAtt ApplicationLoadBalancer.DNSName
