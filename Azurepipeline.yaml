@@ -9,19 +9,11 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-<<<<<<< HEAD
   awsServiceConnection: 'aws-oidc-federation'
   awsRegion: 'us-east-1'
   templatePath: '$(System.DefaultWorkingDirectory)/CloudfrontWithEc2.yaml'
   devStackName: 'MyEC2CftStack-Dev'
   prodStackName: 'MyEC2CftStack-Prod'
-=======
-  awsServiceConnection: 'aws-oidc-federation' # AWS service connection name
-  awsRegion: 'us-east-1' # AWS region for deployment
-  templatePath: '$(System.DefaultWorkingDirectory)/CloudfrontWithEc2.yaml' # Path to CloudFormation template
-  devStackName: 'MyEC2CftStack-Dev' # Name of the CloudFormation stack for Dev
-  prodStackName: 'MyEC2CftStack-Prod' # Name of the CloudFormation stack for Prod
->>>>>>> 35178b5fcb61baf58dbc876be7b9f65f5fb0b9d9
 
 stages:
   - stage: CI_Validation
@@ -43,21 +35,12 @@ stages:
 
   - stage: Deploy_to_Dev
     displayName: 'Deploy to Dev Environment'
-<<<<<<< HEAD
     dependsOn: CI_Validation
     condition: succeeded()
     jobs:
       - deployment: DeployDev
         displayName: 'Deploy to AWS Dev'
         environment: 'Dev'
-=======
-    dependsOn: CI_Validation # This stage depends on the CI_Validation stage
-    condition: succeeded() # Run only if the previous stage (CI_Validation) succeeds
-    jobs:
-      - deployment: DeployDev
-        displayName: 'Deploy to AWS Dev'
-        environment: 'Dev' # References the Dev environment in Azure DevOps
->>>>>>> 35178b5fcb61baf58dbc876be7b9f65f5fb0b9d9
         strategy:
           runOnce:
             deploy:
@@ -78,21 +61,12 @@ stages:
 
   - stage: Deploy_to_Prod
     displayName: 'Deploy to Prod Environment'
-<<<<<<< HEAD
     dependsOn: Deploy_to_Dev
     condition: succeeded()
     jobs:
       - deployment: DeployProd
         displayName: 'Deploy to AWS Prod'
         environment: 'Prod'
-=======
-    dependsOn: Deploy_to_Dev # This stage depends on the Deploy_to_Dev stage
-    condition: succeeded() # Run only if the previous stage (Deploy_to_Dev) succeeds
-    jobs:
-      - deployment: DeployProd
-        displayName: 'Deploy to AWS Prod'
-        environment: 'Prod' # References the Prod environment in Azure DevOps. This environment should have approvals configured.
->>>>>>> 35178b5fcb61baf58dbc876be7b9f65f5fb0b9d9
         strategy:
           runOnce:
             deploy:
@@ -109,8 +83,4 @@ stages:
                       aws cloudformation deploy \
                         --template-file $(templatePath) \
                         --stack-name $(prodStackName) \
-<<<<<<< HEAD
                         --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM
-=======
-                        --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM
->>>>>>> 35178b5fcb61baf58dbc876be7b9f65f5fb0b9d9
